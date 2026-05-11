@@ -1,0 +1,237 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="500" 
+        Width="320"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+    <!--    WindowStartupLocation="CenterScreen"
+            프로그램 실행시 창이 뜨는 위치 설정-->
+    
+    <!--    ResizeMode="NoResize"
+            창 크기 조절 불가로 고정
+            계산기는 크기가 바뀌면 레이아웃이 이상해지니까 고정!-->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="Green"
+                CornerRadius="15"
+                Padding="15,10"
+                Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="{Binding PreviousDisplay}"
+                           FontSize="16"
+                           Foreground="Aqua"
+                           HorizontalAlignment="Right"
+                           Height="25"/>
+                <TextBlock Text="{Binding Display}"
+                           FontSize="48"
+                           Foreground="White"
+                           HorizontalAlignment="Right"
+                           TextTrimming="CharacterEllipsis"/>
+                <!-- TextTrimming="CharacterEllipsis"
+                     TextBlock 안에 글자가 너무 길어서
+                     공간을 넘칠때 처리하는 방법
+
+                     CharacterEllipsis → 넘치면 ...으로 표시
+                     ex) 123456789012345678
+                     → 123456789012...-->
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="C"
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="#FF453A"
+                    Background="#505050"
+                    Command="{Binding ResetCommand}"/>
+            <Button Content="←"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#505050"
+                    Command="{Binding BackspaceCommand}"/>
+            <Button Content="%"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#505050"
+                    Command="{Binding PercentCommand}"/>
+            <Button Content="÷"
+                    Grid.Row="0" 
+                    Grid.Column="3"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#FF9500"
+                    Command="{Binding OperatorInputCommand}"
+                    CommandParameter="/"/>
+
+            <Button Content="7"
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}"
+                    CommandParameter="7"/>
+            <Button Content="8"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="8"/>
+            <Button Content="9"
+                    Grid.Row="1" 
+                    Grid.Column="2"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="9"/>
+            <Button Content="×"
+                    Grid.Row="1" 
+                    Grid.Column="3"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#FF9500"
+                    Command="{Binding OperatorInputCommand}" 
+                    CommandParameter="*"/>
+
+            <Button Content="4"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="5"
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="4"/>
+            <Button Content="5"
+                    Grid.Row="2" 
+                    Grid.Column="1"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="5"/>
+            <Button Content="6"
+                    Grid.Row="2" 
+                    Grid.Column="2"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="6"/>
+            <Button Content="-"
+                    Grid.Row="2" 
+                    Grid.Column="3"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#FF9500"
+                    Command="{Binding OperatorInputCommand}" 
+                    CommandParameter="-"/>
+
+            <Button Content="1"
+                    Grid.Row="3" 
+                    Grid.Column="0"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="1"/>
+            <Button Content="2"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="2"/>
+            <Button Content="3"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="5" 
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="3"/>
+            <Button Content="+"
+                    Grid.Row="3" 
+                    Grid.Column="3"
+                    Margin="5"
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#FF9500"
+                    Command="{Binding OperatorInputCommand}" 
+                    CommandParameter="+"/>
+
+            <Button Content="0"
+                    Grid.Row="4" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="5" FontSize="20"
+                    Foreground="White"
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="0"/>
+            <Button Content="."
+                    Grid.Row="4"
+                    Grid.Column="2"
+                    Margin="5" FontSize="20"
+                    Foreground="White" 
+                    Background="#333333"
+                    Command="{Binding NumberInputCommand}" 
+                    CommandParameter="."/>
+            <Button Content="="
+                    Grid.Row="4" 
+                    Grid.Column="3"
+                    Margin="5" FontSize="20"
+                    Foreground="White" 
+                    Background="#30D158"
+                    Command="{Binding CalculateCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
